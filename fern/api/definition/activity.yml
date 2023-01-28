@@ -6,19 +6,19 @@ imports:
 services:
   http:
     ActivityService:
-      base-path: /
+      base-path: /v2/summary/activity/{user_id}
+      path-parameters:
+        user_id:
+          type: commons.UserId
+          docs: >
+            User id returned by vital create user id request. 
+            This id should be stored in your database against the user and used for all interactions with the vital api.
       auth: true
       endpoints:
         get:
           display-name: Activity Summary
           method: GET
-          path: /summary/activity/{user_id}
-          path-parameters:
-            user_id:
-              type: commons.UserId
-              docs: >
-                User id returned by vital create user id request. 
-                This id should be stored in your database against the user and used for all interactions with the vital api.
+          path: ""
           request:
             name: ClientActivityRequest
             query-parameters:
@@ -59,13 +59,7 @@ services:
         get_raw:
           display-name: Raw Summary
           method: GET
-          path: /summary/activity/{user_id}/raw
-          path-parameters:
-            user_id:
-              type: commons.UserId
-              docs: >
-                User id returned by vital create user id request. 
-                This id should be stored in your database against the user and used for all interactions with the vital api.
+          path: /raw
           request:
             name: ClientActivityRawRequest
             query-parameters:
