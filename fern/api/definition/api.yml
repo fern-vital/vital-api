@@ -1,9 +1,10 @@
 name: api
-auth: HeaderAuth
+auth: ApiKey
 auth-schemes:
-  HeaderAuth: 
+  ApiKey: 
     header: x-vital-api-key
     type: string
+    name: api_key
 environments:
   Production: https://api.tryvital.io/v2
 default-environment: Production
