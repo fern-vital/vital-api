@@ -31,7 +31,54 @@ services:
               end_date:
                 type: string
                 docs: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
-          response: ActivitySummary
+          response: ActivitySummaryResponse
+          examples:
+            - path-parameters:
+                user_id: 70c64d5a-ff06-4c16-b137-361b2441d86e
+              query-parameters:
+                provider: Oura
+                start_date: "2023-01-01"
+                end_date: "2023-01-25"
+              response:
+                body:
+                  activity:
+                    - source:
+                        name: Oura
+                        slug: oura
+                        logo: https://cdn.shopify.com/s/files/1/0163/4644/7926/files/black-on-white-oura-logo.png?v=1584479070
+                      date: "2023-01-27"
+                      user_id: 70c64d5a-ff06-4c16-b137-361b2441d86e
+                      calories_total: 100
+                      calories_active: 2000
+                      steps: 10000
+                      daily_movement: 200
+                      low: 6400
+                      medium: 2000
+                      high: 4500
+
+        raw:
+          display-name: Raw Summary
+          method: GET
+          path: /summary/activity/{user_id}/raw
+          path-parameters:
+            user_id:
+              type: commons.UserId
+              docs: >
+                User id returned by vital create user id request. 
+                This id should be stored in your database against the user and used for all interactions with the vital api.
+          request:
+            name: GetActivitySummaryRequest
+            query-parameters:
+              provider:
+                type: optional<string>
+                docs: Provider like Oura, Strava, etc.
+              start_date:
+                type: string
+                docs: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
+              end_date:
+                type: string
+                docs: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
+          response: ActivitySummaryResponse
           examples:
             - path-parameters:
                 user_id: 70c64d5a-ff06-4c16-b137-361b2441d86e
@@ -57,11 +104,11 @@ services:
                       high: 4500
 
 types:
-  ActivitySummary:
+  ActivitySummaryResponse:
     properties:
-      activity: list<Activity>
+      activity: list<ActivitySummary>
 
-  Activity:
+  ActivitySummary:
     properties:
       source:
         type: ActivitySource
@@ -109,6 +156,29 @@ types:
 
   ActivitySource:
     properties:
-      slug: string 
-      name: string 
-      logo: string
+      slug: 
+        type: string 
+        docs: Slug for designated source 
+      name: 
+        type: string 
+        docs: Name of source of information
+      logo: 
+        type: string
+        docs: URL for source logo
+  
+  RawActivityResponse:
+    properties:
+      activity: list<RawActivity>
+
+  RawActivity:
+    properties:
+      source:
+        type: ActivitySource 
+        docs: Provider 
+      priority_id: commons.PriorityId
+      source_id: commons.SourceId
+      user_id: commons.UserId 
+      provider_id: commons.ProviderId
+      timestampe: datetime 
+      data: optional<string>
+      

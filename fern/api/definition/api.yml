@@ -7,5 +7,3 @@ auth-schemes:
 environments:
   Production: https://api.tryvital.io/v2
 default-environment: Production
-# error-discrimination:
-#   strategy: status-code

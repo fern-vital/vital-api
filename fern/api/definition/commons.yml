@@ -2,3 +2,7 @@
 
 types:
   UserId: string 
+  PriorityId: integer 
+  SourceId: integer 
+  ProviderId: string 
+  
