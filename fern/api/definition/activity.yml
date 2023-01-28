@@ -67,7 +67,7 @@ services:
                 User id returned by vital create user id request. 
                 This id should be stored in your database against the user and used for all interactions with the vital api.
           request:
-            name: GetActivitySummaryRequest
+            name: RawActivitySummaryRequest
             query-parameters:
               provider:
                 type: optional<string>
@@ -78,7 +78,7 @@ services:
               end_date:
                 type: string
                 docs: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
-          response: ActivitySummaryResponse
+          response: RawActivitySummaryResponse
           examples:
             - path-parameters:
                 user_id: 70c64d5a-ff06-4c16-b137-361b2441d86e
@@ -93,15 +93,13 @@ services:
                         name: Oura
                         slug: oura
                         logo: https://cdn.shopify.com/s/files/1/0163/4644/7926/files/black-on-white-oura-logo.png?v=1584479070
-                      date: "2023-01-27"
-                      user_id: 70c64d5a-ff06-4c16-b137-361b2441d86e
-                      calories_total: 100
-                      calories_active: 2000
-                      steps: 10000
-                      daily_movement: 200
-                      low: 6400
-                      medium: 2000
-                      high: 4500
+                      timestamp: '2022-08-04T12:42:44.847351+00:00'
+                      data:
+                        data: ...provider_specific_data
+                      provider_id: e2b25f37-846e-49a9-bf5b-5bb24d62b289
+                      user_id: 8e837eec-0717-41df-b108-43f4f206582a
+                      source_id: 1
+                      priority_id: 1
 
 types:
   ActivitySummaryResponse:
@@ -166,7 +164,7 @@ types:
         type: string
         docs: URL for source logo
   
-  RawActivityResponse:
+  RawActivitySummaryResponse:
     properties:
       activity: list<RawActivity>
 
@@ -179,6 +177,10 @@ types:
       source_id: commons.SourceId
       user_id: commons.UserId 
       provider_id: commons.ProviderId
-      timestampe: datetime 
-      data: optional<string>
+      timestamp: datetime 
+      data: optional<ActivityData>
+
+  ActivityData:
+    properties:
+      data: string 
       
