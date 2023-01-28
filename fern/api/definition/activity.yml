@@ -29,7 +29,7 @@ services:
                 type: string
                 docs: Date from in YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 00:00:00
               end_date:
-                type: string
+                type: optional<string>
                 docs: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
           response: ActivitySummaryResponse
           examples:
