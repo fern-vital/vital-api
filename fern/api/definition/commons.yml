@@ -5,4 +5,16 @@ types:
   PriorityId: integer 
   SourceId: integer 
   ProviderId: string 
+
+  Source:
+    properties:
+      slug: 
+        type: string 
+        docs: Slug for designated source 
+      name: 
+        type: string 
+        docs: Name of source of information
+      logo: 
+        type: string
+        docs: URL for source logo
   

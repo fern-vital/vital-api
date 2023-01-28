@@ -42,7 +42,8 @@ services:
               response:
                 body:
                   activity:
-                    - source:
+                    - id: d5d81366-9f5d-11ed-a8fc-0242ac120002
+                      source:
                         name: Oura
                         slug: oura
                         logo: https://cdn.shopify.com/s/files/1/0163/4644/7926/files/black-on-white-oura-logo.png?v=1584479070
@@ -104,12 +105,12 @@ services:
 types:
   ClientActivityResponse:
     properties:
-      activity: list<ActivitySummary>
+      activity: list<ClientFacingActivity>
 
-  ActivitySummary:
+  ClientFacingActivity:
     properties:
       source:
-        type: ActivitySource
+        type: commons.Source
         docs: Source the data has come from.
       date:
         type: string
@@ -151,18 +152,6 @@ types:
       timezone_offset:
         type: optional<integer>
         docs: Timezone offset from UTC as minutes. For example, EEST (Eastern European Summer Time, +3h) is 180. PST (Pacific Standard Time, -8h) is -480
-
-  ActivitySource:
-    properties:
-      slug: 
-        type: string 
-        docs: Slug for designated source 
-      name: 
-        type: string 
-        docs: Name of source of information
-      logo: 
-        type: string
-        docs: URL for source logo
   
   ClientActivityRawResponse:
     properties:
@@ -170,17 +159,14 @@ types:
 
   RawActivity:
     properties:
+      id: string
       source:
-        type: ActivitySource 
+        type: optional<commons.Source>
         docs: Provider 
       priority_id: commons.PriorityId
       source_id: commons.SourceId
       user_id: commons.UserId 
       provider_id: commons.ProviderId
       timestamp: datetime 
-      data: optional<ActivityData>
-
-  ActivityData:
-    properties:
-      data: string 
+      data: map<string, string>
       
