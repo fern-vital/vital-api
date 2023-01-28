@@ -5,14 +5,14 @@ groups:
         version: 0.0.262
         output:
           location: npm
-          package-name: '@fern-api/{company}'
+          package-name: '@fern-api/vital'
           token: ${FERN_NPM_TOKEN}
         github:
-          repository: fern-{company}/{company}-node
+          repository: fern-vital/vital-node
       - name: fernapi/fern-openapi
         version: 0.0.18
         github:
-          repository: fern-{company}/{company}-openapi
+          repository: fern-vital/vital-openapi
       - name: fernapi/fern-postman
         version: 0.0.34
         output:
@@ -20,4 +20,4 @@ groups:
           api-key: ${FERN_POSTMAN_API_KEY}
           workspace-id: ${FERN_POSTMAN_WORKSPACE_ID}
         github:
-          repository: fern-{company}/{company}-postman
+          repository: fern-vital/vital-postman
