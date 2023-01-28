@@ -6,5 +6,8 @@ auth-schemes:
     type: string
     name: api_key
 environments:
-  Production: https://api.tryvital.io/v2
-default-environment: Production
+  US_Production: https://api.tryvital.io/
+  EU_Production: https://api.eu.tryvital.io
+  US_Sandbox: https://api.sandbox.tryvital.io
+  EU_Sandbox: https://api.sandbox.eu.tryvital.io
+default-environment: US_Production
