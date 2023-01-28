@@ -9,7 +9,7 @@ services:
       base-path: /
       auth: true
       endpoints:
-        summary:
+        get:
           display-name: Activity Summary
           method: GET
           path: /summary/activity/{user_id}
@@ -20,7 +20,7 @@ services:
                 User id returned by vital create user id request. 
                 This id should be stored in your database against the user and used for all interactions with the vital api.
           request:
-            name: GetActivitySummaryRequest
+            name: ClientActivityRequest
             query-parameters:
               provider:
                 type: optional<string>
@@ -31,7 +31,7 @@ services:
               end_date:
                 type: optional<string>
                 docs: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
-          response: ActivitySummaryResponse
+          response: ClientActivityResponse
           examples:
             - path-parameters:
                 user_id: 70c64d5a-ff06-4c16-b137-361b2441d86e
@@ -56,7 +56,7 @@ services:
                       medium: 2000
                       high: 4500
 
-        raw:
+        get_raw:
           display-name: Raw Summary
           method: GET
           path: /summary/activity/{user_id}/raw
@@ -67,7 +67,7 @@ services:
                 User id returned by vital create user id request. 
                 This id should be stored in your database against the user and used for all interactions with the vital api.
           request:
-            name: RawActivitySummaryRequest
+            name: ClientActivityRawRequest
             query-parameters:
               provider:
                 type: optional<string>
@@ -78,7 +78,7 @@ services:
               end_date:
                 type: string
                 docs: Date to YYYY-MM-DD or ISO formatted date time. If a date is provided without a time, the time will be set to 23:59:59
-          response: RawActivitySummaryResponse
+          response: ClientActivityRawResponse
           examples:
             - path-parameters:
                 user_id: 70c64d5a-ff06-4c16-b137-361b2441d86e
@@ -89,7 +89,8 @@ services:
               response:
                 body:
                   activity:
-                    - source:
+                    - id: d5d81366-9f5d-11ed-a8fc-0242ac120002
+                      source:
                         name: Oura
                         slug: oura
                         logo: https://cdn.shopify.com/s/files/1/0163/4644/7926/files/black-on-white-oura-logo.png?v=1584479070
@@ -102,14 +103,14 @@ services:
                       priority_id: 1
 
 types:
-  ActivitySummaryResponse:
+  ClientActivityResponse:
     properties:
-      activity: list<ActivitySummary>
+      activity: list<ClientFacingActivity>
 
-  ActivitySummary:
+  ClientFacingActivity:
     properties:
       source:
-        type: ActivitySource
+        type: commons.Source
         docs: Source the data has come from.
       date:
         type: string
@@ -151,36 +152,21 @@ types:
       timezone_offset:
         type: optional<integer>
         docs: Timezone offset from UTC as minutes. For example, EEST (Eastern European Summer Time, +3h) is 180. PST (Pacific Standard Time, -8h) is -480
-
-  ActivitySource:
-    properties:
-      slug: 
-        type: string 
-        docs: Slug for designated source 
-      name: 
-        type: string 
-        docs: Name of source of information
-      logo: 
-        type: string
-        docs: URL for source logo
   
-  RawActivitySummaryResponse:
+  ClientActivityRawResponse:
     properties:
       activity: list<RawActivity>
 
   RawActivity:
     properties:
+      id: string
       source:
-        type: ActivitySource 
+        type: optional<commons.Source>
         docs: Provider 
       priority_id: commons.PriorityId
       source_id: commons.SourceId
       user_id: commons.UserId 
       provider_id: commons.ProviderId
       timestamp: datetime 
-      data: optional<ActivityData>
-
-  ActivityData:
-    properties:
-      data: string 
+      data: map<string, string>
       
