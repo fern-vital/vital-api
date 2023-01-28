@@ -42,8 +42,7 @@ services:
               response:
                 body:
                   activity:
-                    - id: d5d81366-9f5d-11ed-a8fc-0242ac120002
-                      source:
+                    - source:
                         name: Oura
                         slug: oura
                         logo: https://cdn.shopify.com/s/files/1/0163/4644/7926/files/black-on-white-oura-logo.png?v=1584479070
@@ -90,7 +89,8 @@ services:
               response:
                 body:
                   activity:
-                    - source:
+                    - id: d5d81366-9f5d-11ed-a8fc-0242ac120002
+                      source:
                         name: Oura
                         slug: oura
                         logo: https://cdn.shopify.com/s/files/1/0163/4644/7926/files/black-on-white-oura-logo.png?v=1584479070
