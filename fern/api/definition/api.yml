@@ -1,5 +1,11 @@
 name: api
-auth: bearer
+auth: HeaderAuth
+auth-schemes:
+  HeaderAuth: 
+    header: x-vital-api-key
+    type: string
 environments:
   Production: https://api.tryvital.io/v2
 default-environment: Production
+# error-discrimination:
+#   strategy: status-code
