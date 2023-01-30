@@ -1,7 +1,7 @@
 name: api
 auth: ApiKey
 auth-schemes:
-  ApiKey: 
+  ApiKey:
     header: x-vital-api-key
     type: string
     name: api_key

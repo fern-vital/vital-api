@@ -1,20 +1,19 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fern-api/fern/main/fern.schema.json
 
 types:
-  UserId: string 
-  PriorityId: integer 
-  SourceId: integer 
-  ProviderId: string 
+  UserId: string
+  PriorityId: integer
+  SourceId: integer
+  ProviderId: string
 
   Source:
     properties:
-      slug: 
-        type: string 
-        docs: Slug for designated source 
-      name: 
-        type: string 
+      slug:
+        type: string
+        docs: Slug for designated source
+      name:
+        type: string
         docs: Name of source of information
-      logo: 
+      logo:
         type: string
         docs: URL for source logo
-  
